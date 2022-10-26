@@ -1,6 +1,6 @@
 # Building
 
-Prerequisites:
+#### Prerequisites:
 
 1. Ensure you have the Go tools installed.
 
