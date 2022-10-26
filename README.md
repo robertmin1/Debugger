@@ -1,5 +1,6 @@
 # DEBUGGER
-The goal of the project is to enable our debugger print `A breakpoint has been hit` before our Word Generator Program prints a random string. 
+The project's objective is to make our debugger print `A breakpoint has been hit` before our word generator program prints a random string.
+Rewriting registers and writing data to a specific address was done using `Ptrace.`
 
 # Building
 
