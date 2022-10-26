@@ -4,7 +4,7 @@
 
 1. Ensure you have the Go tools installed.
 
-### Option A : Using Go build commands
+#### Option A : Using Go build commands
 
 1. Clone `DEBUGGER` via Git
 
