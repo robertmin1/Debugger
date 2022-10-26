@@ -1,4 +1,4 @@
-#DEBUGGER
+# DEBUGGER
 The goal of the project is to enable our debugger print `A breakpoint has been hit` before our Word Generator Program prints a random string. 
 
 # Building
