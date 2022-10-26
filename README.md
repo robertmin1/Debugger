@@ -6,10 +6,10 @@ Prerequisites:
 
 Option A : Using Go build commands
 
-    1. Clone `DEBUGGER` via Git
+1. Clone `DEBUGGER` via Git
 
-    2. Open a terminal in the cloned repository and run `export GOBIN=[PATH OF  CLONED REPOSITORY]`
+2. Open a terminal in the cloned repository and run `export GOBIN=[PATH OF  CLONED REPOSITORY]`
 
-    3. Run `go install WordGenerator.go`
+3. Run `go install WordGenerator.go`
 
-    4. Run `go run main.go`
+4. Run `go run main.go`
