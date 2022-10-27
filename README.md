@@ -19,3 +19,7 @@ Rewriting registers and writing data to a specific address was done using `Ptrac
 3. Run `go install WordGenerator.go`
 
 4. Run `go run main.go`
+
+# TODO.
+
+# Information About The Program
