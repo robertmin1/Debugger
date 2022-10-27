@@ -20,6 +20,6 @@ Rewriting registers and writing data to a specific address was done using `Ptrac
 
 4. Run `go run main.go`
 
-# TODO.
+## TODO.
 
-# Information About The Program
+## Information About The Program
