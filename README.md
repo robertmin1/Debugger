@@ -23,3 +23,6 @@ Rewriting registers and writing data to a specific address was done using `Ptrac
 ## TODO.
 
 ## Information About The Program
+Since we want to print `A breakpoint has been hit` before our Word Generator program prints a random string we need to pause the Word Generator before it prints.
+Line 21 is where the printing occurs, thus we need to establish a breakpoint there. The instruction address on line 21 will be used to set the breakpoint.
+The command : `objdump --dwarf=decodedline ./WordGenerator` will be used to get the address of line 21. (The command: `go install WordGenerator.go` must before executed beforehand.)
