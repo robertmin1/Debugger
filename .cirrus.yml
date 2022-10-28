@@ -6,6 +6,9 @@ task:
     - apt-get update
     - apt-get install -y golang-go
     - apt-get install -y git
+    - git clone https://github.com/robertmin1/Debugger && cd Debugger
+    - export GOBIN="$PWD"
+    - go install WordGenerator.go
   test_script:
     - testdata/test.bash
   
