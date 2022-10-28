@@ -39,5 +39,5 @@ We have to execute the instruction at the address once more because it has alrea
 
 Since we changed the register, the program will now run according to its usual flow if we continue. However, we want to hit the breakpoint once again, so we'll ask `ptrace` to carry out only the subsequent instruction before setting the breakpoint once more. `PtraceSingleStep` allows us to execute only one instruction.
 
-Before our WordGenerator program prints a random string during execution, the message` A breakpoint has been hit` is printed.
+Before our WordGenerator program prints a random string during execution, the message `A breakpoint has been hit` is printed.
 The software performs as intended.
