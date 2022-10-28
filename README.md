@@ -21,7 +21,9 @@ Rewriting registers and writing data to a specific address was done using `Ptrac
 4. Run `go run main.go`
 
 ## TODO.
-    Implement Cirrus Tests
+    Implement Cirrus Test
+        - The test was implemented but it doesn't work as expected.
+        - The bash script created does work as expected when tested manually.
 
 ## Information About The Program
 
