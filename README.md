@@ -23,7 +23,7 @@ Rewriting registers and writing data to a specific address was done using `Ptrac
 ## TODO.
     Implement Cirrus Test
         - The test was implemented but it doesn't work as expected.
-        - The bash script created does work as expected when tested manually.
+        - The bash script for the test does work as expected when executed manually.
 
 ## Information About The Program
 
