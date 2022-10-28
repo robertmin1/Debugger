@@ -16,20 +16,6 @@ type Breakpoint struct {
 	OriginalData []byte
 }
 
-func newBreakpoint(pid int, addr uintptr) *Breakpoint {
-	data := make([]byte, 1)
-	if _, err := unix.PtracePeekData(pid, addr, data); err != nil {
-		panic(err)
-	}
-	if _, err := unix.PtracePokeData(pid, addr, []byte{0xCC}); err != nil {
-		panic(err)
-	}
-	return &Breakpoint{
-		Addr:         addr,
-		OriginalData: data,
-	}
-}
-
 func setBreakpoint(pid int, addr uintptr) []byte {
 	data := make([]byte, 1)
 	if _, err := unix.PtracePeekData(pid, addr, data); err != nil {
@@ -64,22 +50,6 @@ func resetBreakpoint(pid int, addr uintptr, data []byte) {
 		panic(err.Error())
 	}
 	setBreakpoint(pid, addr)
-}
-
-func (b *Breakpoint) Clear(pid int, addr uintptr) {
-	if _, err := unix.PtracePokeData(pid, b.Addr, b.OriginalData); err != nil {
-		panic(err.Error())
-	}
-	// set the execution flow to continue
-	regs := &unix.PtraceRegs{}
-	if err := unix.PtraceGetRegs(pid, regs); err != nil {
-		panic(err)
-	}
-	fmt.Printf("registers %+v\n", regs)
-	regs.Rip = uint64(b.Addr)
-	if err := unix.PtraceSetRegs(pid, regs); err != nil {
-		panic(err)
-	}
 }
 
 func main() {
