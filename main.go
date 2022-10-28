@@ -13,16 +13,20 @@ import (
 
 func setBreakpoint(pid int, addr uintptr) []byte {
 	data := make([]byte, 1)
+	// Read the memory since it will be used later
 	if _, err := unix.PtracePeekData(pid, addr, data); err != nil {
 		panic(err)
 	}
+	// Replacing the data at the address with 0xCC
 	if _, err := unix.PtracePokeData(pid, addr, []byte{0xCC}); err != nil {
 		panic(err)
 	}
+	// We return the original data 
 	return data
 }
 
 func resetBreakpoint(pid int, addr uintptr, data []byte) {
+	// Replace the data in the address with the original data
 	if _, err := unix.PtracePokeData(pid, addr, data); err != nil {
 		panic(err.Error())
 	}
@@ -36,6 +40,7 @@ func resetBreakpoint(pid int, addr uintptr, data []byte) {
 	if err := unix.PtraceSetRegs(pid, regs); err != nil {
 		panic(err)
 	}
+	// execute only one instruction
 	if err := unix.PtraceSingleStep(pid); err != nil {
 		panic(err)
 	}
@@ -44,6 +49,7 @@ func resetBreakpoint(pid int, addr uintptr, data []byte) {
 	if _, err := unix.Wait4(pid, &status, 0, nil); err != nil {
 		panic(err.Error())
 	}
+	// set the breakpoint again
 	setBreakpoint(pid, addr)
 }
 
