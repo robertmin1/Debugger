@@ -2,8 +2,6 @@ task:
   name: Test
   container:
     image: debian:latest
-    cpu: 1
-    memory: 1G
   install script:
     - apt-get update
     - apt-get install -y golang-go
