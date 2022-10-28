@@ -34,3 +34,6 @@ We use `PtracePeekData` to read the memory first since it will be used later. Th
 
 We need the program to continue running normally once the breakpoint is reached. The application doesn't function normally since we previously changed the data at the address. As a result, original data must be used to replace the int 3. Since we captured the original data using `PtracePeekData`, we just revert to the original data.
 
+We have to execute the instruction at the address once more because it has already been executed. Once the instruction pointer is set to the address, the CPU will once more execute it. `PtraceGetRegs` and `PtraceSetRegs` are commands used for manipulating CPU registers.
+
+Since we changed the register, the program will now run according to its usual flow if we continue. However, we want to hit the breakpoint once again, so we'll ask `ptrace` to carry out only the subsequent instruction before setting the breakpoint once more. `PtraceSingleStep` allows us to execute only one instruction.

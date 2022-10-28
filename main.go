@@ -11,11 +11,6 @@ import (
 	"golang.org/x/sys/unix"
 )
 
-type Breakpoint struct {
-	Addr         uintptr
-	OriginalData []byte
-}
-
 func setBreakpoint(pid int, addr uintptr) []byte {
 	data := make([]byte, 1)
 	if _, err := unix.PtracePeekData(pid, addr, data); err != nil {
