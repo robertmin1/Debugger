@@ -10,5 +10,4 @@ task:
         - apt-get install -y golang-go
   test_script:
     - testdata/test.bash
-  depends_on:
-    - "Compile Go latest linux amd64"
+  
