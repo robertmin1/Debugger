@@ -41,3 +41,5 @@ Since we changed the register, the program will now run according to its usual f
 
 Before our WordGenerator program prints a random string during execution, the message `A breakpoint has been hit` is printed.
 The software performs as intended.
+![pro](https://user-images.githubusercontent.com/104002271/198543797-0ffffa48-bc9e-40a5-85b7-7288444417bd.PNG)
+
