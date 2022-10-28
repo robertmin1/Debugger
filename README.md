@@ -38,3 +38,6 @@ We need the program to continue running normally once the breakpoint is reached.
 We have to execute the instruction at the address once more because it has already been executed. Once the instruction pointer is set to the address, the CPU will once more execute it. `PtraceGetRegs` and `PtraceSetRegs` are commands used for manipulating CPU registers.
 
 Since we changed the register, the program will now run according to its usual flow if we continue. However, we want to hit the breakpoint once again, so we'll ask `ptrace` to carry out only the subsequent instruction before setting the breakpoint once more. `PtraceSingleStep` allows us to execute only one instruction.
+
+Before our WordGenerator program prints a random string during execution, the message` A breakpoint has been hit` is printed.
+The software performs as intended.
