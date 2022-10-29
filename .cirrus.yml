@@ -1,9 +1,10 @@
 task:
   name: Test
   container:
-    image: fedora:latest
+    image: debian:latest
   install script:
-    - dnf install -y golang-go
-    - dnf install -y git
+    - apt-get update
+    - apt-get install -y golang-go
+    - apt-get install -y git 
   test_script:
     - testdata/test.bash
