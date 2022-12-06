@@ -1,22 +1,28 @@
-# Attention: if you submit an improvement for a Namecoin Cirrus config, please
-# file a GitHub issue about it at the namecoin/meta repo, so that we can make
-# sure it propagates to all the other Namecoin repos.  Thanks!
-
 task:
   alias: Go Lint
   container:
     image: golangci/golangci-lint:latest
-  install_script:
-    - apt-get update
-    - apt-get install -y libcap-dev
-  path_script:
-    - source testdata/move_to_gopath.bash
+  fetch_script:
+    - go mod init github.com/"$CIRRUS_REPO_FULL_NAME"
+    - go mod tidy
+    - go generate ./...
+    - go mod tidy
+  # interfacebloat complains about miekg/pkcs11 API's that we can't change.
+  # nosnakecase complains about miekg/pkcs11 API's that we can't change.
+  lint_script: golangci-lint run --enable-all --disable exhaustivestruct,exhaustruct,gochecknoglobals,gochecknoinits,interfacebloat,nosnakecase $GOLANGCI_ARGS -v --out-format json > lint-report.json
   matrix:
-    - env:
-        GOLANGCI_MODULES_ARGS: ""
-        MODULES_NAME: ""
-      fetch_script:
-        - cd $(go env GOPATH)/src/github.com/"$CIRRUS_REPO_FULL_NAME"
-        - go mod init github.com/"$CIRRUS_REPO_FULL_NAME"
-        - go mod edit -replace github.com/coreos/go-systemd=github.com/coreos/go-systemd/v22@latest -replace github.com/namecoin/certinject=../certinject -replace github.com/namecoin/x509-compressed=../x509-compressed
-        - go mod tidy
+    - name: Go Lint New
+      env:
+        GOLANGCI_ARGS: "--new-from-rev=HEAD~"
+    - name: Go Lint Mandatory
+      env:
+        GOLANGCI_ARGS: "--disable=cyclop,dupl,gci,godox,goerr113,gomnd,gosimple,ifshort,lll,nlreturn,nosnakecase,revive,varnamelen,wrapcheck"
+    - name: Go Lint
+      env:
+        GOLANGCI_ARGS: ""
+      allow_failures: true
+  always:
+    golangci_artifacts:
+      path: lint-report.json
+      type: text/json
+      format: golangci
