@@ -37,12 +37,10 @@ task:
       package_install_script:
         - apt-get update
         - apt-get install -y git sudo wget
-        - cd /tmp
-        - wget https://golang.org/dl/go1.18.linux-amd64.tar.gz
-        - sudo tar -C /usr/local -xzf go1.18.linux-amd64.tar.gz
-        - echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
-        - echo "export GOPATH=~/.go" >> ~/.profile
-        - source ~/.profile
+        - wget https://golang.org/dl/go1.17.1.linux-amd64.tar.gz
+        - sudo tar -C /usr/local -xzf go1.17.1.linux-amd64.tar.gz
+        - export PATH=$PATH:/usr/local/go/bin
+        - go version
       env:
         CI_DISTRO: debian
     - container:
