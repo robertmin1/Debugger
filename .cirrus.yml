@@ -36,7 +36,13 @@ task:
         memory: 1G
       package_install_script:
         - apt-get update
-        - apt-get install -y golang-go git 
+        - apt-get install -y git sudo
+        - cd /tmp
+        - wget https://golang.org/dl/go1.<VERSION_NUMBER>.linux-amd64.tar.gz
+        - sudo tar -C /usr/local -xzf go1.<VERSION_NUMBER>.linux-amd64.tar.gz
+        - echo "export PATH=$PATH:/usr/local/go/bin" >> ~/.profile
+        - echo "export GOPATH=~/.go" >> ~/.profile
+        - source ~/.profile
       env:
         CI_DISTRO: debian
     - container:
