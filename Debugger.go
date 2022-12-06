@@ -21,7 +21,7 @@ func setBreakpoint(pid int, addr uintptr) []byte {
 	if _, err := unix.PtracePokeData(pid, addr, []byte{0xCC}); err != nil {
 		panic(err)
 	}
-	// We return the original data 
+	// We return the original data
 	return data
 }
 
@@ -71,12 +71,12 @@ func main() {
 		if err := unix.PtraceCont(pid, 0); err != nil {
 			panic(err.Error())
 		}
-		// wait for the interupt to come.
+		// wait for the interrupt to come.
 		var status unix.WaitStatus
 		if _, err := unix.Wait4(pid, &status, 0, nil); err != nil {
 			panic(err.Error())
 		}
-		fmt.Println("A breakpoint has been hit")
+		fmt.Printf("A breakpoint has been hit")
 		// reset the breakpoint
 		resetBreakpoint(pid, 0x47f0d4, data)
 	}
