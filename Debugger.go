@@ -71,6 +71,7 @@ func main() {
 
 	data := setBreakpoint(pid, 0x47f0d4)
 	statement := "A breakpoint has been hit"
+	
 	for {
 		if err := unix.PtraceCont(pid, 0); err != nil {
 			panic(err.Error())
@@ -80,6 +81,7 @@ func main() {
 		if _, err := unix.Wait4(pid, &status, 0, nil); err != nil {
 			panic(err.Error())
 		}
+
 		fmt.Println(statement)
 		// reset the breakpoint
 		resetBreakpoint(pid, 0x47f0d4, data)
