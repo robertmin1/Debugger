@@ -36,7 +36,6 @@ func resetBreakpoint(pid int, addr uintptr, data []byte) {
 		panic(err)
 	}
 	regs.Rip = uint64(addr)
-
 	if err := unix.PtraceSetRegs(pid, regs); err != nil {
 		panic(err)
 	}
@@ -76,7 +75,7 @@ func main() {
 		if _, err := unix.Wait4(pid, &status, 0, nil); err != nil {
 			panic(err.Error())
 		}
-		fmt.Printf("A breakpoint has been hit")
+		fmt.Println("A breakpoint has been hit")
 		// reset the breakpoint
 		resetBreakpoint(pid, 0x47f0d4, data)
 	}
