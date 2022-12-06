@@ -35,7 +35,7 @@ func resetBreakpoint(pid int, addr uintptr, data []byte) {
 	if err := unix.PtraceGetRegs(pid, regs); err != nil {
 		panic(err)
 	}
-	
+
 	regs.Rip = uint64(addr)
 	if err := unix.PtraceSetRegs(pid, regs); err != nil {
 		panic(err)
@@ -59,14 +59,18 @@ func main() {
 	process := exec.Command("testdata/WordGenerator")
 	process.SysProcAttr = &syscall.SysProcAttr{Ptrace: true, Setpgid: true, Foreground: false}
 	process.Stdout = os.Stdout
+
 	if err := process.Start(); err != nil {
 		panic(err)
 	}
+
 	time.Sleep(2 * time.Second)
 
 	// get the pid of the process
 	pid := process.Process.Pid
+
 	data := setBreakpoint(pid, 0x47f0d4)
+	statement := "A breakpoint has been hit"
 	for {
 		if err := unix.PtraceCont(pid, 0); err != nil {
 			panic(err.Error())
@@ -76,7 +80,7 @@ func main() {
 		if _, err := unix.Wait4(pid, &status, 0, nil); err != nil {
 			panic(err.Error())
 		}
-		fmt.Println("A breakpoint has been hit")
+		fmt.Println(statement)
 		// reset the breakpoint
 		resetBreakpoint(pid, 0x47f0d4, data)
 	}
