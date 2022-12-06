@@ -1,10 +1,22 @@
+# Attention: if you submit an improvement for a Namecoin Cirrus config, please
+# file a GitHub issue about it at the namecoin/meta repo, so that we can make
+# sure it propagates to all the other Namecoin repos.  Thanks!
+
 task:
-  name: Test
+  alias: Go Lint
   container:
-    image: debian:latest
-  install script:
+    image: golangci/golangci-lint:latest
+  install_script:
     - apt-get update
-    - apt-get install -y golang-go
-    - apt-get install -y git 
-  test_script:
-    - testdata/test.bash
+    - apt-get install -y libcap-dev
+  path_script:
+    - source testdata/move_to_gopath.bash
+  matrix:
+    - env:
+        GOLANGCI_MODULES_ARGS: ""
+        MODULES_NAME: ""
+      fetch_script:
+        - cd $(go env GOPATH)/src/github.com/"$CIRRUS_REPO_FULL_NAME"
+        - go mod init github.com/"$CIRRUS_REPO_FULL_NAME"
+        - go mod edit -replace github.com/coreos/go-systemd=github.com/coreos/go-systemd/v22@latest -replace github.com/namecoin/certinject=../certinject -replace github.com/namecoin/x509-compressed=../x509-compressed
+        - go mod tidy
