@@ -56,7 +56,7 @@ func resetBreakpoint(pid int, addr uintptr, data []byte) {
 func main() {
 	runtime.LockOSThread()
 	// start the process
-	process := exec.Command("./WordGenerator")
+	process := exec.Command("testdata/WordGenerator")
 	process.SysProcAttr = &syscall.SysProcAttr{Ptrace: true, Setpgid: true, Foreground: false}
 	process.Stdout = os.Stdout
 	if err := process.Start(); err != nil {
