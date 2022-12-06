@@ -82,7 +82,7 @@ func main() {
 			panic(err.Error())
 		}
 
-		fmt.Println(statement) //permit
+		fmt.Println(statement) // nolint
 		// reset the breakpoint
 		resetBreakpoint(pid, 0x47f0d4, data)
 	}
