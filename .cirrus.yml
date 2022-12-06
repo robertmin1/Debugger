@@ -28,7 +28,7 @@ task:
       format: golangci
 
 task:
-  name: "Task Two $CI_DISTRO"
+  name: "Debugger $CI_DISTRO"
   matrix:
     - container:
         image: debian:latest

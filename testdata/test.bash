@@ -15,5 +15,7 @@ git clone https://github.com/robertmin1/Debugger && cd Debugger/testdata
 export GOBIN="$PWD"
 go install WordGenerator.go
 cd ..
+go mod init Debugger.go
+go mod tidy
 
 go run Debugger.go >> dump.txt & sleep 10; Check
