@@ -19,10 +19,10 @@ Rewriting registers and writing data to a specific address was done using `Ptrac
 3. Run `go install WordGenerator.go`
 
 4. Run `go run main.go`
-~~The test was implemented but it doesn't work as expected~~
+
 ## TODO.
 ### Implement Cirrus Test
-~~The test was implemented but it doesn't work as expected~~
+~~Implement Go Linter Tests~~
 
 The bash script for the test does work as expected when executed manually.
         

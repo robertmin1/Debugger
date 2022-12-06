@@ -26,3 +26,26 @@ task:
       path: lint-report.json
       type: text/json
       format: golangci
+
+task:
+  name: "Task Two $CI_DISTRO"
+  matrix:
+    - container:
+        image: debian:latest
+        cpu: 1
+        memory: 1G
+      package_install_script:
+        - apt-get update
+        - apt-get install -y golang-go git 
+      env:
+        CI_DISTRO: debian
+    - container:
+        image: fedora:latest
+        cpu: 1
+        memory: 1G
+      package_install_script:
+        - dnf install -y golang-go git 
+      env:
+        CI_DISTRO: fedora
+  test_script:
+    - testdata/test.bash
