@@ -35,6 +35,7 @@ func resetBreakpoint(pid int, addr uintptr, data []byte) {
 	if err := unix.PtraceGetRegs(pid, regs); err != nil {
 		panic(err)
 	}
+	
 	regs.Rip = uint64(addr)
 	if err := unix.PtraceSetRegs(pid, regs); err != nil {
 		panic(err)
