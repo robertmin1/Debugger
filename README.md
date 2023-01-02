@@ -24,7 +24,7 @@ Rewriting registers and writing data to a specific address was done using `Ptrac
 ### Implement Cirrus Test
 ~~Implement Go Linter Tests~~
 
-~~The bash script for the test does work as expected when executed manually.
+~~The bash script for the test does work as expected when executed manually.~~
         
 
 ## Information About The Program
